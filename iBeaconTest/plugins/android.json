@@ -15,11 +15,17 @@
         },
         "cordova-plugin-background-mode": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "asia.icgx.iBeaconTest"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-device": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "asia.icgx.iBeaconTest"
         }
     }
 }

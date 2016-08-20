@@ -41,6 +41,17 @@ var app = {
             logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
             cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
             + JSON.stringify(pluginResult));
+            if(pluginResult.state == "CLRegionStateInside"){
+                cordova.plugins.notification.local.schedule({
+                    title: "iBeaconTest",
+                    message: "Welcome! You can find the Beacon nearby!"
+                });
+            }else if(pluginResult.state == "CLRegionStateOutside"){
+                cordova.plugins.notification.local.schedule({
+                    title: "iBeaconTest",
+                    message: "Goodbye! Remember to check-in every week!"
+                });
+            }
         };
 
         delegate.didStartMonitoringForRegion = function (pluginResult) {
@@ -77,12 +88,13 @@ var app = {
 
         cordova.plugins.locationManager.setDelegate(delegate);
         cordova.plugins.locationManager.requestAlwaysAuthorization();
-        // cordova.plugins.locationManager.startMonitoringForRegion(region)
-        //     .fail(function(e) { console.error(e); })
-        //     .done();
-        cordova.plugins.locationManager.startRangingBeaconsInRegion(region)
+        cordova.plugins.locationManager.startMonitoringForRegion(region)
             .fail(function(e) { console.error(e); })
             .done();
+        // cordova.plugins.locationManager.startRangingBeaconsInRegion(region)
+        //     .fail(function(e) { console.error(e); })
+        //     .done();
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
